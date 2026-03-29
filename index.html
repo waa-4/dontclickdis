@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hehe</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background: black;
+            height: 100%;
+            font-family: Arial, sans-serif;
+        }
+        #finalImage {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 95%;
+            max-height: 95%;
+            z-index: 9999;
+            display: none;
+            box-shadow: 0 0 50px red;
+        }
+    </style>
+</head>
+<body>
+
+    <img id="finalImage" src="final/final.gif" alt="FINAL">
+
+    <script>
+        // First popup
+        alert("why did you click the link?");
+
+        // Second popup
+        alert("you are a stubborn one eh?");
+
+        // After both alerts - unleash the chaos
+        const image = document.getElementById("finalImage");
+        image.style.display = "block";
+
+        // Extremely loud sound (using your War Cry sound + a loud troll sound)
+        const audio = new Audio("https://www.myinstants.com/media/sounds/let-me-hear-your-war-cry.mp3"); 
+        // Alternative direct loud troll sound if the above doesn't work well:
+        // const audio = new Audio("https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"); // replace with better loud one if needed
+
+        audio.volume = 1.0;     // Max volume
+        audio.loop = true;      // Keeps playing
+        audio.play().catch(() => {
+            // Some mobile browsers block autoplay, so we try again on user interaction
+            document.body.addEventListener('touchstart', () => audio.play(), { once: true });
+            document.body.addEventListener('click', () => audio.play(), { once: true });
+        });
+
+        // Extra loudness attempt (some browsers need multiple Audio instances)
+        setTimeout(() => {
+            const audio2 = new Audio(audio.src);
+            audio2.volume = 1.0;
+            audio2.loop = true;
+            audio2.play();
+        }, 800);
+
+        // Make it even harder to escape
+        setTimeout(() => {
+            alert("TURN UP YOUR VOLUME :)");
+        }, 1500);
+    </script>
+
+</body>
+</html>
