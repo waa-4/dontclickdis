@@ -13,22 +13,22 @@
             height: 100%;
             font-family: Arial, sans-serif;
         }
-        #finalImage {
+        #blobfish {
             position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            max-width: 95%;
-            max-height: 95%;
+            max-width: 98%;
+            max-height: 98%;
             z-index: 9999;
             display: none;
-            box-shadow: 0 0 50px red;
+            image-rendering: pixelated; /* makes it look sharper */
         }
     </style>
 </head>
 <body>
 
-    <img id="finalImage" src="final/final.gif" alt="FINAL">
+    <img id="blobfish" src="https://tenor.com/view/fly-blobfish-blob-fish-blobfish-flying-blobfish-scream-gif-3901112318664547619" alt="FLYING BLOBFISH">
 
     <script>
         // First popup
@@ -37,35 +37,47 @@
         // Second popup
         alert("you are a stubborn one eh?");
 
-        // After both alerts - unleash the chaos
-        const image = document.getElementById("finalImage");
-        image.style.display = "block";
+        // After both alerts → unleash the chaos
+        const gif = document.getElementById("blobfish");
+        gif.style.display = "block";
 
-        // Extremely loud sound (using your War Cry sound + a loud troll sound)
-        const audio = new Audio("https://www.myinstants.com/media/sounds/let-me-hear-your-war-cry.mp3"); 
-        // Alternative direct loud troll sound if the above doesn't work well:
-        // const audio = new Audio("https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"); // replace with better loud one if needed
+        // Loud alarm sound (direct working link - air raid / loud siren style)
+        const audio = new Audio("https://www.orangefreesounds.com/wp-content/uploads/2016/09/Air-raid-siren.mp3");
 
-        audio.volume = 1.0;     // Max volume
-        audio.loop = true;      // Keeps playing
-        audio.play().catch(() => {
-            // Some mobile browsers block autoplay, so we try again on user interaction
-            document.body.addEventListener('touchstart', () => audio.play(), { once: true });
-            document.body.addEventListener('click', () => audio.play(), { once: true });
-        });
+        audio.volume = 1.0;     // Maximum volume
+        audio.loop = true;      // Keeps screaming
 
-        // Extra loudness attempt (some browsers need multiple Audio instances)
+        // Play the sound
+        function playLoud() {
+            audio.play().catch(() => {
+                // Fallback for mobile browsers that block autoplay
+                document.body.addEventListener('touchstart', () => audio.play(), { once: true });
+                document.body.addEventListener('click', () => audio.play(), { once: true });
+            });
+        }
+
+        playLoud();
+
+        // Extra loud attempt (some browsers need this)
         setTimeout(() => {
             const audio2 = new Audio(audio.src);
             audio2.volume = 1.0;
             audio2.loop = true;
             audio2.play();
-        }, 800);
+        }, 600);
 
-        // Make it even harder to escape
+        // Final annoying popup
         setTimeout(() => {
-            alert("TURN UP YOUR VOLUME :)");
-        }, 1500);
+            alert("TURN YOUR VOLUME UP :)");
+        }, 1200);
+
+        // Make the GIF shake a bit for extra chaos
+        setInterval(() => {
+            gif.style.transform = `translate(-50%, -50%) rotate(${Math.random() * 8 - 4}deg)`;
+            setTimeout(() => {
+                gif.style.transform = "translate(-50%, -50%)";
+            }, 100);
+        }, 300);
     </script>
 
 </body>
